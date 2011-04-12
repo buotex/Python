@@ -1,32 +1,16 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
-import urllib, urllib2
+import urllib, urllib2, re
+import os
 
 
 class Websupport:
     def __init__(self):
-        self.searchBox = QLineEdit
         self.mangaList = []
-        self.syncTitles()
+        #self.syncTitles()
         
-
-    def syncTitles(self): #virtual
+    def lookFor(self, name):
         pass
-
-    def listTitles(self):
-        for x in self.mangaList:
-            print x #placeholder
-
-    def searchTitle(self,name):
-        for x in zip(range(len(self.mangaList)),self.mangaList):
-            if x[1].find(name) == 0:
-                print x[0], x[1]
-        
-    def browseTitle(self,name):
-        self.parseChapters(name)
-        #show all available chapters
-        #need gui to select chapter?
-        #else just start latest or something
 
     def selectChapter(self,number):
         files = []
@@ -34,14 +18,14 @@ class Websupport:
         self.createSubfolder()
         self.downloadFiles(files)
 
-    def downloadFiles(files):
-        print "notImplemented"
-
-    def parseChapters(self,name):
-        #fill up self.chapterList
-        pass
-
-
+    def downloadFiles(self, imgLinks, target):
+        os.mkdir(target)
+        for link in imgLinks:
+            response = urllib2.urlopen(link)
+            filename = re.search('[^/]*$',link).group(0)
+            file = open(target + filename,"w")
+            file.write(response.read())
+            file.close()
 
 #Searchbox:
 class SearchBox:
@@ -54,5 +38,8 @@ class SearchBox:
         for x in nameList:
             if nameList.find(name) == 0:
                 self.popup.addItem(QString(x))
+
+
+
 
 
