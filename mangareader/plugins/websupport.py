@@ -1,27 +1,24 @@
+from PySide.QtCore import *
+from PySide.QtGui import *
 import urllib, urllib2
 
-button = QPushButton('Test')
 
 class Websupport:
-    
-    
-
-
     def __init__(self):
         self.searchBox = QLineEdit
-        self.titleList = []
-        syncTitles()
+        self.mangaList = []
+        self.syncTitles()
         
 
     def syncTitles(self): #virtual
         pass
 
     def listTitles(self):
-        for x in self.titleList
+        for x in self.mangaList:
             print x #placeholder
 
     def searchTitle(self,name):
-        for x in zip(range(len(self.titleList)),self.titleList):
+        for x in zip(range(len(self.mangaList)),self.mangaList):
             if x[1].find(name) == 0:
                 print x[0], x[1]
         

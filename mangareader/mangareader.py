@@ -2,7 +2,7 @@ import sys, os
 from PySide.QtCore import *
 from PySide.QtGui import *
 
-import plugins/websupport
+import plugins.websupport import Websupport
 
 imagetypes = ('.jpg', '.jpeg', '.png')
 
